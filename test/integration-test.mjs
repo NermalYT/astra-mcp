@@ -27,7 +27,7 @@ const client = new Client({ name: 'astra-integration', version: '2.0.0' });
 const transport = new StdioClientTransport({
   command: process.execPath,
   args: [process.env.ASTRA_SERVER_MODULE || path.join(base, 'server.mjs')],
-  env: { ...process.env, ASTRA_BROWSER_PROFILE: path.join(temporary, 'browser-profile') },
+  env: { ...process.env, ASTRA_TOOL_MODE: 'full', ASTRA_BROWSER_PROFILE: path.join(temporary, 'browser-profile') },
   stderr: 'pipe',
 });
 transport.stderr?.on('data', data => process.stderr.write(data));
