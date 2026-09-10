@@ -37,7 +37,8 @@ if [[ "${1:-}" == --copy-to ]]; then
     --exclude=.test-output --exclude=.test-state --exclude=coverage --exclude=dist --exclude=backups \
     --exclude=runtime --exclude=runtime-packages --exclude=verification.json --exclude=verification.log \
     --exclude=tool-catalog.json --exclude=settings.json --exclude=backends.json \
-    --exclude=browser-output --exclude=browser-profiles --exclude=app-homes -cf - . | tar -C "$astra_target" -xf -
+    --exclude=browser-output --exclude=browser-profiles --exclude=app-homes \
+    --exclude=control.json --exclude=workspace-notes --exclude=maintenance -cf - . | tar -C "$astra_target" -xf -
   exec bash "$astra_target/scripts/install.sh" "$@"
 fi
 
