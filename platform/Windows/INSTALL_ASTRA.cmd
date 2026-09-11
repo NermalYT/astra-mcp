@@ -14,6 +14,10 @@ if errorlevel 1 (
   set "astra_exit=1"
   goto finish
 )
+if "%~1"=="" if not defined ASTRA_NO_GUI (
+  powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File "%astra_root%scripts\setup-gui.ps1"
+  exit /b
+)
 echo Astra for Windows 11 Pro runs inside an initialized Ubuntu LTS WSL2 distribution.
 echo Your ordinary Linux user may be asked for its sudo password.
 powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%astra_root%scripts\install.ps1" -InstallSystemDeps -ReplaceLegacy %*
