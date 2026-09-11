@@ -34,6 +34,12 @@ for astra_command in python3 curl tar xz sha256sum; do
   fi
 done
 
+if [[ "${1:-}" == --no-gui ]]; then
+  shift
+elif [[ $# == 0 && "${ASTRA_NO_GUI:-0}" != 1 && -n "${DISPLAY:-}" ]] && python3 "$astra_root/scripts/setup-gui.py" --check >/dev/null 2>&1; then
+  exec python3 "$astra_root/scripts/setup-gui.py"
+fi
+
 astra_target="$HOME/.local/share/astra-mcp/sources/release-$(date -u +%Y%m%d-%H%M%S)-$$"
 echo "Installing a fresh Astra source copy in $astra_target"
 bash "$astra_root/scripts/install.sh" --copy-to "$astra_target" --system-deps --replace-legacy "$@"
